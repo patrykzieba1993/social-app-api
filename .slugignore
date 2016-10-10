@@ -1,0 +1,14 @@
+docs/
+infrastructure/
+test/
+provision/
+README.md
+Vagrantfile
+.editorconfig
+.env.local
+.istanbul
+.jshintignore
+.jshintrc
+.travis.yml
+README.md
+Vagrantfile

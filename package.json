@@ -1,0 +1,51 @@
+{
+  "name": "social-app-api",
+  "version": "1.0.0",
+  "description": "Api for social app",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./scripts/run-tests.sh",
+    "lint": "eslint ."
+  },
+  "author": "patrykzieba1993",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:patrykzieba1993/social-app-api.git"
+  },
+  "keywords": [],
+  "dependencies": {
+    "boom": "3.2.2",
+    "bunyan": "1.8.1",
+    "check-node-version": "1.1.1",
+    "co": "4.6.0",
+    "dotenv": "2.0.0",
+    "faker": "3.1.0",
+    "glob": "^7.0.5",
+    "hapi": "13.5.0",
+    "hapi-bunyan": "0.6.0",
+    "herokupipelines4travis": "~0.2.16",
+    "inert": "4.0.1",
+    "joi": "8.4.2",
+    "lodash": "4.13.1",
+    "pg": "6.0.1",
+    "pg-hstore": "2.3.2",
+    "sequelize": "3.23.4",
+    "sequelize-cli": "2.4.0",
+    "vision": "4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "3.0.1",
+    "eslint-config-airbnb-base": "4.0.0",
+    "eslint-plugin-import": "1.10.2",
+    "eslint-plugin-security": "1.2.0",
+    "herokupipelines4travis": "~0.2.34",
+    "istanbul": "0.4.4",
+    "mocha": "2.5.3"
+  },
+  "engines": {
+    "node": ">= 6.0",
+    "npm": ">= 3.6.0"
+  }
+}

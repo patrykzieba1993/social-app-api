@@ -1,0 +1,10 @@
+{
+  "port": 3000,
+  "httpCache": {
+    "expiresIn": 10000,
+    "privacy": "public"
+  },
+  "cache": {
+    "ttl": 604800
+  }
+}

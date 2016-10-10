@@ -1,7 +1,7 @@
 {
   "name": "social-app-api",
   "version": "1.0.0",
-  "description": "Api for social app",
+  "description": "Api for social app.",
   "main": "index.js",
   "license": "MIT",
   "scripts": {

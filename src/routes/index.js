@@ -1,9 +1,16 @@
 const baseRoute = require('./base');
+const authorizationRoute = require('./authorization');
 
 function setupRouting(server, options, next) {
   const routes = [
     {
       register: baseRoute,
+    },
+    {
+      register: authorizationRoute,
+      options: {
+        prefix: '/authorization',
+      },
     },
   ];
 

@@ -1,4 +1,8 @@
-const Repositories = [];
+const AuthorizationRepository = require('./authorization');
+
+const Repositories = [
+  AuthorizationRepository,
+];
 
 function setupRepositories(server, options, next) {
   const repositories = {};

@@ -18,8 +18,6 @@ function setup(opts = {}) {
     publicationConfigs: createPublicationConfigs(process.env),
   });
 
-  config.cache.url = process.env.REDISCLOUD_URL;
-
   const server = new Hapi.Server({
     app: config,
   });
@@ -51,7 +49,7 @@ function setup(opts = {}) {
     },
   });
 
-  server.ext(EXTENSIONS.ON_PRE, parseHeaders);
+  // server.ext(EXTENSIONS.ON_PRE, parseHeaders);
 
   server.register(plugins)
     .catch(e => server.log('error', e));

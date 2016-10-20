@@ -16,6 +16,16 @@ function setupRoute(server, options, next) {
         tags: ['api'],
       },
     },
+    {
+      method: 'POST',
+      path: '/login',
+      config: {
+        handler: authorizationController.loginUser,
+        description: 'Login action',
+        notes: 'Check if login authorized',
+        tags: ['api'],
+      },
+    },
   ];
 
   routes.forEach(route => Object.assign(route, { path: options.prefix + route.path }));
@@ -28,6 +38,6 @@ function setupRoute(server, options, next) {
 exports.register = setupRoute;
 
 exports.register.attributes = {
-  name: 'routes-emojis',
+  name: 'routes-authorization',
   version: '1.0.1',
 };

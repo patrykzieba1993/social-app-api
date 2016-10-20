@@ -1,7 +1,9 @@
 const AuthorizationRepository = require('./authorization');
+const DashboardRepository = require('./dashboard');
 
 const Repositories = [
   AuthorizationRepository,
+  DashboardRepository,
 ];
 
 function setupRepositories(server, options, next) {

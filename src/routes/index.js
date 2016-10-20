@@ -1,5 +1,6 @@
 const baseRoute = require('./base');
 const authorizationRoute = require('./authorization');
+const dashboardRoute = require('./dashboard');
 
 function setupRouting(server, options, next) {
   const routes = [
@@ -10,6 +11,12 @@ function setupRouting(server, options, next) {
       register: authorizationRoute,
       options: {
         prefix: '/authorization',
+      },
+    },
+    {
+      register: dashboardRoute,
+      options: {
+        prefix: '/dashboard',
       },
     },
   ];

@@ -4,14 +4,41 @@ class DashboardController extends RouteController {
   createPost(request, reply) {
     const post = request.payload;
     this.repositories.Dashboard.createPost(post)
-      .then(() => reply().code(201))
+      .then((inserted) => reply(inserted).code(201))
+      .catch((e) => reply(this.handleError(e)));
+  }
+
+  createComment(request, reply) {
+    const comment = request.payload;
+    this.repositories.Dashboard.createComment(comment)
+      .then((insertedId) =>
+        this.repositories.Dashboard.getComment(insertedId)
+          .then(comment => comment))
+      .then((data) => reply(data).code(201))
       .catch((e) => reply(this.handleError(e)));
   }
   
-  getPosts(request, reply) {
+  getPostsWithComments(request, reply) {
     const id = request.params.id;
     this.repositories.Dashboard.getPosts(id)
-      .then((res) => reply(res).code(200))
+      .then((posts) => {
+        const results = [];
+        const postsIds = posts.map(post => post.id);
+        return this.repositories.Dashboard.getComments(postsIds)
+          .then(comments => {
+            posts.forEach(post => {
+              let item = {
+                id: post.id,
+                author: post.userId,
+                content: post.content,
+                comments: comments.filter(comment => comment.postId === post.id),
+              };
+              results.push(item);
+            })
+          })
+          .then(() => results)
+      })
+      .then((result) => reply(result).code(200))
       .catch((e) => reply(this.handleError(e)));
   }
 }

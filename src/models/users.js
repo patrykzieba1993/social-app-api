@@ -11,7 +11,9 @@ function Users(sequelize, DataTypes) {
 
   const UsersModel = sequelize.define('Users', fields, {
     classMethods: {
-      associate: models => {},
+      associate: models => {
+        UsersModel.hasMany(models.Comments, { foreignKey: 'userId', as: 'comment'});
+      },
     },
   });
   return UsersModel;

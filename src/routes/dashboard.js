@@ -9,9 +9,9 @@ function setupRoute(server, options, next) {
   const routes = [
     {
       method: 'GET',
-      path: '/posts/{id}',
+      path: '/postsWithComments/{id}',
       config: {
-        handler: dashboardController.getPosts,
+        handler: dashboardController.getPostsWithComments,
         description: 'Posts return.',
         notes: 'Return posts for specific user',
         tags: ['api'],
@@ -39,6 +39,31 @@ function setupRoute(server, options, next) {
               .integer()
               .required()
               .description('User id, ex: 1'),
+            content: Joi.string()
+              .required()
+              .description('Content of comment, ex: Hello'),
+          }),
+        },
+      },
+    },
+    {
+      method: 'POST',
+      path: '/comment',
+      config: {
+        handler: dashboardController.createComment,
+        description: 'New comment creation',
+        notes: 'Create new comment',
+        tags: ['api'],
+        validate: {
+          payload: Joi.object().keys({
+            userId: Joi.number()
+              .integer()
+              .required()
+              .description('User id, ex: 1'),
+            postId: Joi.number()
+              .integer()
+              .required()
+              .description('Post id, ex: 1'),
             content: Joi.string()
               .required()
               .description('Content of comment, ex: Hello'),

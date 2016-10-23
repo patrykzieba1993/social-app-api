@@ -8,7 +8,8 @@ function Comments(sequelize, DataTypes) {
   const CommentsModel = sequelize.define('Comments', fields, {
     classMethods: {
       associate: models => {
-        CommentsModel.belongsTo(models.Users, { foreignKey: 'userId', as: 'user'})
+        CommentsModel.belongsTo(models.Users, { foreignKey: 'userId', as: 'user'});
+        CommentsModel.hasMany(models.CommentsNotifications, { foreignKey: 'commentId', as: 'comment' });
       },
       getComment: commentId => {
         const models = CommentsModel.sequelize.models;

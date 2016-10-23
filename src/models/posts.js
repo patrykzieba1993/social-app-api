@@ -6,7 +6,10 @@ function Posts(sequelize, DataTypes) {
 
   const PostsModel = sequelize.define('Posts', fields, {
     classMethods: {
-      associate: models => {},
+      associate: models => {
+        PostsModel.belongsTo(models.Users, { foreignKey: 'userId', as: 'user'});
+        PostsModel.hasMany(models.PostsNotifications, { foreignKey: 'postId', as: 'post' });
+      },
     },
   });
   return PostsModel;

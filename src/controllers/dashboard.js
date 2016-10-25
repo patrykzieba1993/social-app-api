@@ -4,16 +4,42 @@ class DashboardController extends RouteController {
   createPost(request, reply) {
     const post = request.payload;
     this.repositories.Dashboard.createPost(post)
-      .then((inserted) => reply(inserted).code(201))
+      .then((inserted) => {
+        return this.repositories.Friendship.getFriends(post.userId)
+          .then((friendsData) => {
+            const friends = friendsData.map(friend => friend.friendId);
+            return this.repositories.Notification.createPostNotifications(friends, inserted.id)
+              .then(() => {
+                return {
+                  friends,
+                  id: inserted.id,
+                };
+              });
+          })
+      })
+      .then((data) => reply(data).code(201))
       .catch((e) => reply(this.handleError(e)));
   }
 
   createComment(request, reply) {
     const comment = request.payload;
     this.repositories.Dashboard.createComment(comment)
-      .then((insertedId) =>
-        this.repositories.Dashboard.getComment(insertedId)
-          .then(comment => comment))
+      .then((insertedId) => {
+        return this.repositories.Friendship.getFriends(comment.userId)
+          .then((friendsData) => {
+            const friends = friendsData.map(friend => friend.friendId);
+            return this.repositories.Notification.createCommentsNotifications(friends, insertedId)
+              .then(() => {
+                return this.repositories.Dashboard.getComment(insertedId)
+                  .then(comment => {
+                    return {
+                      comment,
+                      friends,
+                    };
+                  });
+              });
+          })
+      })
       .then((data) => reply(data).code(201))
       .catch((e) => reply(this.handleError(e)));
   }

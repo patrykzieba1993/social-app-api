@@ -12,7 +12,7 @@ module.exports = {
       commentId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Posts',
+          model: 'Comments',
           key: 'id',
         },
       },

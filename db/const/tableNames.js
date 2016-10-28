@@ -5,4 +5,5 @@ module.exports = {
   FRIENDSHIPS: 'Friendships',
   POSTS_NOTIFICATIONS: 'PostsNotifications',
   COMMENTS_NOTIFICATIONS: 'CommentsNotifications',
+  MESSAGES: 'Messages',
 }

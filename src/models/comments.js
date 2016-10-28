@@ -13,7 +13,7 @@ function Comments(sequelize, DataTypes) {
       },
       getComment: commentId => {
         const models = CommentsModel.sequelize.models;
-        const findOpts = {
+        const findOpts = {  
           include: {
             model: models.Users,
             as: 'user',

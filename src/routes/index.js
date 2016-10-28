@@ -3,6 +3,7 @@ const authorizationRoute = require('./authorization');
 const dashboardRoute = require('./dashboard');
 const notificationRoute = require('./notification');
 const friendshipRoute = require('./friendship');
+const chatRoute = require('./chat');
 
 function setupRouting(server, options, next) {
   const routes = [
@@ -31,6 +32,12 @@ function setupRouting(server, options, next) {
       register: friendshipRoute,
       options: {
         prefix: '/friendship', 
+      },
+    },
+    {
+      register: chatRoute,
+      options: {
+        prefix: '/chat',
       },
     },
   ];

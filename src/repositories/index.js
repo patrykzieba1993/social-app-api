@@ -2,12 +2,14 @@ const AuthorizationRepository = require('./authorization');
 const DashboardRepository = require('./dashboard');
 const FriendshipRepository = require('./friendship');
 const NotificationRepository = require('./notification');
+const MessageRepository = require('./message');
 
 const Repositories = [
   AuthorizationRepository,
   DashboardRepository,
   FriendshipRepository,
   NotificationRepository,
+  MessageRepository,
 ];
 
 function setupRepositories(server, options, next) {

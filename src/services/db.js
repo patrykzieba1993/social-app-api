@@ -12,7 +12,7 @@ function setupDatabase(server, options, next) {
   }
 
   const config = {
-    logging: !!process.env.DB_LOGGING_ENABLED ?
+    logging: !process.env.DB_LOGGING_ENABLED ?
       (log) => server.log('debug', log) :
       false,
     dialect: 'postgres',

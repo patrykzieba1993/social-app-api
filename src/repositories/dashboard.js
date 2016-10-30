@@ -11,15 +11,8 @@ class DashboardRepository extends Repository {
       .then(inserted => inserted.id);
   }
   
-  getPosts(id) {
-    const findOpts = {
-      where: {
-        userId: id,
-      },
-      attributes: ['id', 'userId', 'content'],
-      order: '"createdAt" DESC',
-    };
-    return this.models.Posts.findAll(findOpts);
+  getPosts(ids) {
+    return this.models.Posts.getPosts(ids);
   }
 
   getComment(commentId) {

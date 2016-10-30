@@ -9,6 +9,25 @@ class NotificationRepository extends Repository {
     const notifications = usersIds.map(userId => { return { commentId, userId} });
     return this.models.CommentsNotifications.bulkCreate(notifications);
   }
+  createMessagesNotifications(userId, messageId) {
+    return this.models.MessagesNotifications.create({ userId, messageId });
+  }
+  getCommentsNotifications(userId) {
+    return this.models.CommentsNotifications.getCommentsNotifications(userId);
+  }
+  getPostsNotifications(userId) {
+    return this.models.PostsNotifications.getPostsNotifications(userId);
+  }
+  getMessagesNotifications(userId) {
+    return this.models.MessagesNotifications.getMessagesNotifications(userId);
+  }
+  inactivatePostAndComments(userId) {
+    return this.models.PostsNotifications.update({ active: false }, { where: { userId } })
+      .then(() => this.models.CommentsNotifications.update({ active: false }, { where: { userId } }));
+  }
+  inactivateMessages(userId) {
+    return this.models.MessagesNotifications.update({ active: 'false' }, { where: { userId } });
+  }
 }
 
 module.exports = NotificationRepository;

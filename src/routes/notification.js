@@ -8,45 +8,73 @@ function setupRoute(server, options, next) {
   
   const routes = [
     {
-      method: 'POST',
-      path: '/postNotification',
+      method: 'GET',
+      path: '/postsAndComments/{userId}',
       config: {
-        handler: notificationController.createPostNotification,
-        description: 'New post notification creation',
-        notes: 'Create new post notification',
+        handler: notificationController.getPostsAndCommentsNotifications,
+        description: 'Post and comments notifications.',
+        notes: 'Return posts and comments notifications for specific user',
         tags: ['api'],
         validate: {
-          payload: Joi.object().keys({
+          params: Joi.object().keys({
             userId: Joi.number()
               .integer()
               .required()
               .description('User id, ex: 1'),
-            postId: Joi.number()
-              .integer()
-              .required()
-              .description('Post id, ex: 1'),
           }),
         },
       },
     },
     {
-      method: 'POST',
-      path: '/commentNotification',
+      method: 'PATCH',
+      path: '/postsAndComments/{userId}',
       config: {
-        handler: notificationController.createCommentNotification,
-        description: 'New comment notification creation',
-        notes: 'Create new comment notification',
+        handler: notificationController.inactivatePostsAndCommentsNotifications,
+        description: 'Inactivate post and comments notifications.',
+        notes: 'Inactivate posts and comments notifications for specific user',
         tags: ['api'],
         validate: {
-          payload: Joi.object().keys({
+          params: Joi.object().keys({
             userId: Joi.number()
               .integer()
               .required()
               .description('User id, ex: 1'),
-            commentId: Joi.number()
+          }),
+        },
+      },
+    },
+    {
+      method: 'GET',
+      path: '/messages/{userId}',
+      config: {
+        handler: notificationController.getMessagesNotifications,
+        description: 'Messages notifications.',
+        notes: 'Return messages notifications for specific user',
+        tags: ['api'],
+        validate: {
+          params: Joi.object().keys({
+            userId: Joi.number()
               .integer()
               .required()
-              .description('Comment id, ex: 1'),
+              .description('User id, ex: 1'),
+          }),
+        },
+      },
+    },
+    {
+      method: 'PATCH',
+      path: '/messages/{userId}',
+      config: {
+        handler: notificationController.inactivateMessagesNotifications,
+        description: 'Inactivate messages notifications.',
+        notes: 'Inactivate messages notifications for specific user',
+        tags: ['api'],
+        validate: {
+          params: Joi.object().keys({
+            userId: Joi.number()
+              .integer()
+              .required()
+              .description('User id, ex: 1'),
           }),
         },
       },

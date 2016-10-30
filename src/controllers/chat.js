@@ -5,6 +5,9 @@ class ChatController extends RouteController {
     const message = request.payload;
     
     this.repositories.Message.createMessage(message)
+      .then((messageId) =>
+        this.repositories.Notification.createMessagesNotifications(message.receiverId, messageId)
+      )
       .then(() => reply().code(201))
       .catch(e => reply(this.handleError(e)));
   }

@@ -8,7 +8,8 @@ function Messages(sequelize, DataTypes) {
   const MessagesModel = sequelize.define('Messages', fields, {
     classMethods: {
       associate: (models) => {
-        MessagesModel.belongsTo(models.Users, { foreignKey: 'userId', as: 'user' });
+        MessagesModel.belongsTo(models.Users, { foreignKey: 'senderId', as: 'user' });
+        MessagesModel.hasMany(models.MessagesNotifications, { foreignKey: 'messageId', as: 'message'});
       },
       getMessages: (senderId, receiverId) => {
         const findOpts = {

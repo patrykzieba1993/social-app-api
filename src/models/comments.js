@@ -9,6 +9,7 @@ function Comments(sequelize, DataTypes) {
     classMethods: {
       associate: models => {
         CommentsModel.belongsTo(models.Users, { foreignKey: 'userId', as: 'user'});
+        CommentsModel.belongsTo(models.Posts, { foreignKey: 'postId', as: 'post'});
         CommentsModel.hasMany(models.CommentsNotifications, { foreignKey: 'commentId', as: 'comment' });
       },
       getComment: commentId => {

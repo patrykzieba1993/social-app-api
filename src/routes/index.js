@@ -4,6 +4,8 @@ const dashboardRoute = require('./dashboard');
 const notificationRoute = require('./notification');
 const friendshipRoute = require('./friendship');
 const chatRoute = require('./chat');
+const searchRoute = require('./search');
+const pageRoute = require('./page');
 
 function setupRouting(server, options, next) {
   const routes = [
@@ -38,6 +40,18 @@ function setupRouting(server, options, next) {
       register: chatRoute,
       options: {
         prefix: '/chat',
+      },
+    },
+    {
+      register: searchRoute,
+      options: {
+        prefix: '/search',
+      },
+    },
+    {
+      register: pageRoute,
+      options: {
+        prefix: '/page',
       },
     },
   ];

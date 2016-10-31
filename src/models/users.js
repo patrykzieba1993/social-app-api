@@ -28,7 +28,35 @@ function Users(sequelize, DataTypes) {
         };
         
         return UsersModel.find(findOpts);
-      }
+      },
+      searchUsers: (query) => {
+        const findOpts = {
+          attributes: ['id', 'firstName', 'lastName', 'login'],
+          where: {
+            $or: [
+              {
+                login: {
+                  $iLike: `%${query}%`,
+                },
+              },
+              {
+                firstName: {
+                  $iLike: `%${query}%`,
+                },
+              },
+              {
+                lastName: {
+                  $iLike: `%${query}%`,
+                },
+              },
+              sequelize.where(sequelize.fn('concat', sequelize.col('firstName'), ' ', sequelize.col('lastName')), {
+                $iLike: `%${query}%`,
+              }),
+            ]
+          }
+        };
+        return UsersModel.findAll(findOpts);
+      },
     },
   });
   return UsersModel;

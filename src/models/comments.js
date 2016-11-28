@@ -18,7 +18,7 @@ function Comments(sequelize, DataTypes) {
           include: {
             model: models.Users,
             as: 'user',
-            attributes: ['firstName', 'lastName'],
+            attributes: ['firstName', 'lastName', 'login'],
           },
           where: {
             id: commentId,
@@ -35,7 +35,7 @@ function Comments(sequelize, DataTypes) {
           include: {
             model: models.Users,
             as: 'user',
-            attributes: ['firstName', 'lastName'],
+            attributes: ['firstName', 'lastName', 'login'],
           },
           where: {
             $or: postsIds.map(post => { return { postId: post} })

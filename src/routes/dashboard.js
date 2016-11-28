@@ -8,6 +8,23 @@ function setupRoute(server, options, next) {
 
   const routes = [
     {
+      method: 'POST',
+      path: '/verifier',
+      config: {
+        handler: dashboardController.verifierTest,
+        description: 'Verifier test.',
+        notes: 'Verifier test',
+        tags: ['api'],
+        validate: {
+          payload: Joi.object().keys({
+            text: Joi.string()
+              .required()
+              .description('Text'),
+          }),
+        },
+      },
+    },
+    {
       method: 'GET',
       path: '/postsWithComments/{id}',
       config: {

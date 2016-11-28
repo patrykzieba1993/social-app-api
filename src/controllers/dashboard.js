@@ -1,6 +1,11 @@
 const RouteController = require('./route');
 
 class DashboardController extends RouteController {
+  verifierTest(request, reply) {
+    const { text } = request.payload;
+    reply().code(200);
+  }
+
   createPost(request, reply) {
     const post = request.payload;
     this.repositories.Dashboard.createPost(post)
@@ -10,10 +15,12 @@ class DashboardController extends RouteController {
             const friends = friendsData.map(friend =>
               friend.userId === post.userId ? friend.friendId : friend.userId);
             return this.repositories.Notification.createPostNotifications(friends, inserted.id)
-              .then(() => {
+              .then(() => this.repositories.User.getUserInfo(post.userId))
+              .then(userData => {
                 return {
                   friends,
                   id: inserted.id,
+                  userData,
                 };
               });
           })

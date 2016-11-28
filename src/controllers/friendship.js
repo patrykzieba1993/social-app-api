@@ -2,7 +2,11 @@ const RouteController = require('./route');
 
 class FriendshipController extends RouteController {
   createFriendship(request, reply) {
-    
+    const { userId, friendId } = request.payload;
+
+    this.repositories.Friendship.createFriendship(userId, friendId)
+      .then(() => reply().code(201))
+      .catch(e => reply(this.handleError(e)));
   }
   
   getFriends(request, reply) {

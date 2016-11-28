@@ -33,3 +33,4 @@ function Posts(sequelize, DataTypes) {
 }
 
 module.exports = Posts;
+

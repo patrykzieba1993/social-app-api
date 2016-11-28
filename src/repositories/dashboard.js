@@ -25,6 +25,7 @@ class DashboardRepository extends Repository {
         user: {
           firstName: data.user.firstName,
           lastName: data.user.lastName,
+          login: data.user.login,
         },
         userId: data.userId,
       }});

@@ -1,5 +1,6 @@
 const Boom = require('boom');
 const Repositories = require('./../repositories');
+const Verifier = require('./../services/verifier/verifier');
 
 const CONST = require('./../utils/const');
 const BOOM_ERROR_METHODS = CONST.BOOM_ERROR_METHODS;
@@ -9,6 +10,7 @@ class RouteController {
   constructor(opts) {
     this.logger = opts.server.log.bind(opts.server);
     this.repositories = opts.server.plugins[Repositories.register.attributes.name].repositories;
+    this.verifier = opts.server.plugins[Verifier.register.attributes.name].verifier;
   }
 
   // --------------------------------------------------------

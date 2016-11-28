@@ -27,7 +27,7 @@ class SearchController extends RouteController {
 
     this.repositories.Search.searchUsers(query, userId)
       .then(result => searchedUsers = result)
-      .then(() => this.repositories.Friendship.getFriendsWithData(userId))
+      .then(() => this.repositories.Friendship.getFriendsWithData(userId, false))
       .then(result => friends = result)
       .then(() => prepareResponse())
       .then(res => reply(res).code(200))

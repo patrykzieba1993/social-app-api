@@ -82,6 +82,31 @@ class NotificationController extends RouteController {
       .catch(e => reply(this.handleError(e)));
   }
 
+  getFriendshipsNotifications(request, reply) {
+    const { userId } = request.params;
+
+    const prepareFriendshipsNotifications = notifications =>
+      notifications.map(notification => {
+        return {
+          id: notification.friendship.id,
+          type: 'friendship',
+          who: {
+            id: notification.friendship.user.id,
+            firstName: notification.friendship.user.firstName,
+            lastName: notification.friendship.user.lastName,
+            login: notification.friendship.user.login,
+          },
+          when: notification.createdAt,
+          active: notification.get('active'),
+        };
+      });
+
+    this.repositories.Notification.getFriendshipsNotifications(userId)
+      .then(raw => prepareFriendshipsNotifications(raw))
+      .then(result => reply(result).code(200))
+      .catch(e => reply(this.handleError(e)));
+  }
+
   inactivatePostsAndCommentsNotifications(request, reply) {
     const { userId } = request.params;
     this.repositories.Notification.inactivatePostAndComments(userId)
@@ -92,6 +117,24 @@ class NotificationController extends RouteController {
   inactivateMessagesNotifications(request, reply) {
     const { userId } = request.params;
     this.repositories.Notification.inactivateMessages(userId)
+      .then(() => reply().code(204))
+      .catch(e => reply(this.handleError(e)));
+  }
+  inactivateFriendshipsNotifications(request, reply) {
+    const { userId } = request.params;
+    this.repositories.Notification.inactivateFriendships(userId)
+      .then(() => reply().code(204))
+      .catch(e => reply(this.handleError(e)));
+  }
+  acceptFriendship(request, reply) {
+    const { id } = request.params;
+    this.repositories.Friendship.acceptFriendship(id)
+      .then(() => reply().code(204))
+      .catch(e => reply(this.handleError(e)));
+  }
+  rejectFriendship(request, reply) {
+    const { id } = request.params;
+    this.repositories.Friendship.rejectFriendship(id)
       .then(() => reply().code(204))
       .catch(e => reply(this.handleError(e)));
   }

@@ -9,7 +9,7 @@ function setupRoute(server, options, next) {
   const routes = [
     {
       method: 'POST',
-      path: '/',
+      path: '',
       config: {
         handler: friendshipController.createFriendship,
         description: 'New friendship creation',

@@ -11,6 +11,7 @@ const Routing = require('./routes');
 const cfg = require('./../config/app');
 const parseHeaders = require('./extensions/parseHeaders');
 const createPublicationConfigs = require('./../src/utils/configs').createPublicationConfigs;
+const Verifier = require('./services/verifier/verifier');
 const _ = require('lodash');
 
 function setup(opts = {}) {
@@ -33,6 +34,7 @@ function setup(opts = {}) {
     },
     Database,
     Repositories,
+    Verifier,
     Routing,
   ];
 

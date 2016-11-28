@@ -21,12 +21,18 @@ class NotificationRepository extends Repository {
   getMessagesNotifications(userId) {
     return this.models.MessagesNotifications.getMessagesNotifications(userId);
   }
+  getFriendshipsNotifications(userId) {
+    return this.models.FriendshipsNotifications.getFriendshipsNotifications(userId);
+  }
   inactivatePostAndComments(userId) {
     return this.models.PostsNotifications.update({ active: false }, { where: { userId } })
       .then(() => this.models.CommentsNotifications.update({ active: false }, { where: { userId } }));
   }
   inactivateMessages(userId) {
     return this.models.MessagesNotifications.update({ active: 'false' }, { where: { userId } });
+  }
+  inactivateFriendships(userId) {
+    return this.models.FriendshipsNotifications.update({ active: 'false' }, { where: { userId } });
   }
 }
 

@@ -26,6 +26,24 @@ function setupRoute(server, options, next) {
     },
     {
       method: 'GET',
+      path: '/userData/{id}',
+      config: {
+        handler: dashboardController.getUserData,
+        description: 'Get user data.',
+        notes: 'Return user data for specific user',
+        tags: ['api'],
+        validate: {
+          params: Joi.object().keys({
+            id: Joi.number()
+              .integer()
+              .required()
+              .description('User id, ex: 1'),
+          }),
+        },
+      },
+    },
+    {
+      method: 'GET',
       path: '/postsWithComments/{id}',
       config: {
         handler: dashboardController.getPostsWithComments,

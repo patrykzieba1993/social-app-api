@@ -6,6 +6,22 @@ class DashboardController extends RouteController {
     reply().code(200);
   }
 
+  getUserData(request, reply) {
+    const { id } = request.params;
+
+    this.repositories.User.getUserInfo(id)
+      .then((raw) => {
+        return {
+          firstName: raw[0].firstName,
+          lastName: raw[0].lastName,
+          id: raw[0].id,
+          login: raw[0].login,
+        };
+      })
+      .then((data) => reply(data).code(200))
+      .catch(e => reply(this.handleError(e)));
+  }
+
   createPost(request, reply) {
     const post = request.payload;
     this.repositories.Dashboard.createPost(post)
